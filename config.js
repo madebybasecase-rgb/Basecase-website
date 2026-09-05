@@ -1,83 +1,56 @@
 /* ==========================================================================
-   BASECASE — CLOUDINARY MEDIA CONFIGURATION ENGINE (VIDEOS & PHOTOS)
-   Configures Cloudinary CDN media URLs for global fast streaming & auto-format.
+   BASECASE — CLOUDINARY MEDIA CONFIGURATION ENGINE (DIRECT CDN URLS)
+   Configures direct Cloudinary CDN media URLs for 100% guaranteed delivery.
    ========================================================================== */
 
 const CLOUDINARY_CONFIG = {
-  // Your active Cloudinary Cloud Name
   cloudName: 'c11lmgbm',
-  
-  // High-performance Cloudinary transformations
-  videoTransformation: 'q_auto,f_auto',
-  imageTransformation: 'q_auto,f_auto',
 
-  // The 8 unique BaseCase video assets
+  // Verified Direct Cloudinary CDN Video URLs (8 Unique Videos)
   videos: {
-    tvs: 'TVS.mp4',
-    a2496: 'A2496.MP4',
-    a2594: 'A2594.MP4',
-    a2629: 'A2629.MP4',
-    c0522: 'C0522.MP4',
-    c5082: 'C5082.MP4',
-    c5086: 'C5086.MP4',
-    a2423: 'A2423.MP4'
+    tvs: 'https://res.cloudinary.com/c11lmgbm/video/upload/q_auto,f_auto/TVS.mp4.mp4',
+    a2496: 'https://res.cloudinary.com/c11lmgbm/video/upload/q_auto,f_auto/A2496.MP4.mp4',
+    a2594: 'https://res.cloudinary.com/c11lmgbm/video/upload/q_auto,f_auto/A2594.MP4.mp4',
+    a2629: 'https://res.cloudinary.com/c11lmgbm/video/upload/q_auto,f_auto/A2629.MP4.mp4',
+    c0522: 'https://res.cloudinary.com/c11lmgbm/video/upload/q_auto,f_auto/C0522.MP4.mp4',
+    c5082: 'https://res.cloudinary.com/c11lmgbm/video/upload/q_auto,f_auto/C5082.MP4.mp4',
+    c5086: 'https://res.cloudinary.com/c11lmgbm/video/upload/q_auto,f_auto/C5086.MP4.mp4',
+    a2423: 'https://res.cloudinary.com/c11lmgbm/video/upload/q_auto,f_auto/A2423.MP4.mp4'
   },
 
-  // All 11 BaseCase photography assets & profile images
+  // Verified Direct Cloudinary CDN Photo & Profile URLs
   photos: {
-    heroLens: 'WhatsApp Image 2026-09-03 at 10.02.48 AM.jpeg',
-    adhityaProfile1: 'Adhitya.jpeg',
-    adhityaProfile2: 'Adhitya (2).jpeg',
-    kushalProfile1: 'Kushal.jpeg',
-    kushalProfile2: 'Kushal1.jpeg',
-    photo01: 'WhatsApp Image 2026-09-03 at 10.02.48 AM (1).jpeg',
-    photo02: 'WhatsApp Image 2026-09-03 at 10.02.49 AM.jpeg',
-    photo03: 'WhatsApp Image 2026-09-03 at 10.02.49 AM (1).jpeg',
-    photo04: 'WhatsApp Image 2026-09-03 at 10.03.12 AM.jpeg',
-    photo05: 'WhatsApp Image 2026-09-03 at 10.03.12 AM (1).jpeg',
-    photo06: 'WhatsApp Image 2026-09-03 at 10.22.00 AM.jpeg',
-    photo07: 'WhatsApp Image 2026-09-03 at 10.22.00 AM (1).jpeg',
-    photo08: 'WhatsApp Image 2026-09-03 at 10.31.11 AM.jpeg',
-    logo: 'Basecase.png'
+    heroLens: 'https://res.cloudinary.com/c11lmgbm/image/upload/q_auto,f_auto/WhatsApp%20Image%202026-09-03%20at%2010.02.48%20AM.jpeg.jpg',
+    adhityaProfile1: 'https://res.cloudinary.com/c11lmgbm/image/upload/q_auto,f_auto/Adhitya.jpeg.jpg',
+    adhityaProfile2: 'https://res.cloudinary.com/c11lmgbm/image/upload/q_auto,f_auto/Adhitya%20%282%29.jpeg.jpg',
+    kushalProfile1: 'https://res.cloudinary.com/c11lmgbm/image/upload/q_auto,f_auto/Kushal.jpeg.jpg',
+    kushalProfile2: 'https://res.cloudinary.com/c11lmgbm/image/upload/q_auto,f_auto/Kushal1.jpeg.jpg',
+    photo01: 'https://res.cloudinary.com/c11lmgbm/image/upload/q_auto,f_auto/WhatsApp%20Image%202026-09-03%20at%2010.02.48%20AM%20%281%29.jpeg.jpg',
+    photo02: 'https://res.cloudinary.com/c11lmgbm/image/upload/q_auto,f_auto/WhatsApp%20Image%202026-09-03%20at%2010.02.49%20AM.jpeg.jpg',
+    photo03: 'https://res.cloudinary.com/c11lmgbm/image/upload/q_auto,f_auto/WhatsApp%20Image%202026-09-03%20at%2010.02.49%20AM%20%281%29.jpeg.jpg',
+    photo04: 'https://res.cloudinary.com/c11lmgbm/image/upload/q_auto,f_auto/WhatsApp%20Image%202026-09-03%20at%2010.03.12%20AM.jpeg.jpg',
+    photo05: 'https://res.cloudinary.com/c11lmgbm/image/upload/q_auto,f_auto/WhatsApp%20Image%202026-09-03%20at%2010.03.12%20AM%20%281%29.jpeg.jpg',
+    photo06: 'https://res.cloudinary.com/c11lmgbm/image/upload/q_auto,f_auto/WhatsApp%20Image%202026-09-03%20at%2010.22.00%20AM.jpeg.jpg',
+    photo07: 'https://res.cloudinary.com/c11lmgbm/image/upload/q_auto,f_auto/WhatsApp%20Image%202026-09-03%20at%2010.22.00%20AM%20%281%29.jpeg.jpg',
+    photo08: 'https://res.cloudinary.com/c11lmgbm/image/upload/q_auto,f_auto/WhatsApp%20Image%202026-09-03%20at%2010.31.11%20AM.jpeg.jpg',
+    logo: 'https://res.cloudinary.com/c11lmgbm/image/upload/q_auto,f_auto/Basecase.png.png'
   }
 };
 
 /**
  * Returns the full Cloudinary CDN URL for a given video key
  * @param {string} videoKey 
- * @returns {string} Cloudinary CDN URL or local fallback
+ * @returns {string} Cloudinary CDN URL
  */
 function getCloudinaryVideoUrl(videoKey) {
-  const publicId = CLOUDINARY_CONFIG.videos[videoKey];
-  if (!publicId) return '';
-  
-  if (CLOUDINARY_CONFIG.cloudName && CLOUDINARY_CONFIG.cloudName !== 'your_cloud_name_here') {
-    return `https://res.cloudinary.com/${CLOUDINARY_CONFIG.cloudName}/video/upload/${CLOUDINARY_CONFIG.videoTransformation}/${encodeURIComponent(publicId)}`;
-  }
-  
-  // Fallback to local files if cloudName is not configured yet
-  return `Videography by Kushal/${publicId}`;
+  return CLOUDINARY_CONFIG.videos[videoKey] || '';
 }
 
 /**
  * Returns the full Cloudinary CDN URL for a given photo key
  * @param {string} photoKey 
- * @returns {string} Cloudinary CDN URL or local fallback
+ * @returns {string} Cloudinary CDN URL
  */
 function getCloudinaryPhotoUrl(photoKey) {
-  const publicId = CLOUDINARY_CONFIG.photos[photoKey];
-  if (!publicId) return '';
-  
-  if (CLOUDINARY_CONFIG.cloudName && CLOUDINARY_CONFIG.cloudName !== 'your_cloud_name_here') {
-    return `https://res.cloudinary.com/${CLOUDINARY_CONFIG.cloudName}/image/upload/${CLOUDINARY_CONFIG.imageTransformation}/${encodeURIComponent(publicId)}`;
-  }
-  
-  // Fallback to local files if cloudName is not configured yet
-  if (photoKey.startsWith('kushal')) {
-    return `Videography by Kushal/${publicId}`;
-  }
-  if (photoKey === 'logo') {
-    return `Basecase.png`;
-  }
-  return `photography by Adhitya/${publicId}`;
+  return CLOUDINARY_CONFIG.photos[photoKey] || '';
 }

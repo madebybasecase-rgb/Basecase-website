@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="en" class="lenis">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BASECASE — Art-Directed Visual Production Studio</title>
+
+  <!-- Typography & Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Smooth Scroll (Lenis) & GSAP Animation Libraries -->
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.0.42/dist/lenis.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+  <!-- Cloudinary Media Config -->
+  <script src="config.js"></script>
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="theme-black">
+
+  <!-- Custom Micro Cursor with Dynamic Badge -->
+  <div class="custom-cursor" id="customCursor">
+    <span class="cursor-badge" id="cursorBadge"></span>
+  </div>
+
+  <!-- Persistent Texture Overlays (Film Grain & Subtle Vignette) -->
+  <div class="film-grain"></div>
+  <div class="vignette-overlay"></div>
+
+  <!-- 01. MINIMAL FIXED HEADER -->
+  <header class="px-header">
+    <div class="px-header-left">
+      <a href="#intro" class="px-header-logo" aria-label="BaseCase Home">
+        <img src="Basecase.png" data-cloudinary-photo="logo" alt="BaseCase Official Logo">
+      </a>
+    </div>
+
+    <div class="px-header-center micro-text">
+      <span class="rec-dot">●</span> OPTICAL STUDIO / 2026
+    </div>
+
+    <nav class="px-header-right">
+      <a href="#intro" class="px-nav-item">INDEX</a>
+      <a href="#adhitya-profile" class="px-nav-item">ADHITYA</a>
+      <a href="#photography" class="px-nav-item">PHOTOS</a>
+      <a href="#tvs-featured" class="px-nav-item">FEATURED</a>
+      <a href="#videography" class="px-nav-item">REELS</a>
+      <a href="#kushal-profile" class="px-nav-item">KUSHAL</a>
+      <a href="#services" class="px-nav-item">SERVICES</a>
+      <a href="#contact" class="px-nav-item">CONTACT</a>
+    </nav>
+  </header>
+
+  <!-- TOP MARQUEE TICKER BANNER -->
+  <div class="top-marquee-banner">
+    <div class="marquee-track" data-scrub-marquee data-scrub-speed="-35">
+      <span class="marquee-item"><span>●</span> BASECASE CREATIVE PRODUCTION</span>
+      <span class="marquee-item"><span>●</span> PHOTOGRAPHY BY ADHITYA</span>
+      <span class="marquee-item"><span>●</span> VIDEOGRAPHY BY KUSHAL</span>
+      <span class="marquee-item"><span>●</span> 8 UNIQUE VIDEO REELS & 11 PHOTO ASSETS</span>
+      <span class="marquee-item"><span>●</span> BANGALORE / INDIA</span>
+      <span class="marquee-item"><span>●</span> BASECASE CREATIVE PRODUCTION</span>
+      <span class="marquee-item"><span>●</span> PHOTOGRAPHY BY ADHITYA</span>
+      <span class="marquee-item"><span>●</span> VIDEOGRAPHY BY KUSHAL</span>
+      <span class="marquee-item"><span>●</span> 8 UNIQUE VIDEO REELS & 11 PHOTO ASSETS</span>
+    </div>
+  </div>
+
+  <!-- MAIN CONTINUOUS ARTBOARD CONTAINER -->
+  <main class="continuous-artboard">
+
+    <!-- 02. HERO SECTION — INTERACTIVE BASECASE CAMERA LENS & OVERSIZED KINETIC TYPOGRAPHY -->
+    <section class="editorial-section hero-editorial" id="intro" data-bg-color="#050505">
+      <canvas class="hero-cloud-canvas" id="cloudCanvas"></canvas>
+
+      <div class="section-container hero-container">
+        <!-- Top HUD Technical Bar -->
+        <div class="hero-meta-row micro-text">
+          <div class="meta-item"><span class="hud-tag">SYS.01</span> BASECASE OPTICAL ENGINE</div>
+          <div class="meta-item"><span class="rec-dot">●</span> 24 FPS RAW PHOTOGRAPHY & MOTION</div>
+          <div class="meta-item">LOCATION: BANGALORE, IN</div>
+          <div class="meta-item">CLOUDINARY CDN: CONNECTED</div>
+        </div>
+
+        <!-- 2-Column Hero Layout -->
+        <div class="hero-grid-two-col">
+          <!-- LEFT COLUMN: Interactive Camera Lens / Mechanical Aperture Object -->
+          <div class="hero-lens-column">
+            <div class="lens-micro-labels micro-text">
+              <span>BASECASE / OPTICAL SYSTEM 01</span>
+              <span><span class="rec-dot">●</span> REC</span>
+            </div>
+
+            <!-- Signature Lens Visual Object -->
+            <div class="basecase-lens-wrapper" id="heroLens" data-cursor="FOCUS">
+              <div class="lens-chassis">
+                <div class="lens-ring-outer" id="lensRingOuter">
+                  <div class="lens-knurling-ring"></div>
+                  <div class="lens-ring-ticks"></div>
+                  <div class="lens-focus-mark">35MM F/1.4</div>
+                </div>
+
+                <div class="lens-ring-inner" id="lensRingInner">
+                  <div class="aperture-blades-mask" id="apertureBlades">
+                    <div class="blade blade-1"></div>
+                    <div class="blade blade-2"></div>
+                    <div class="blade blade-3"></div>
+                    <div class="blade blade-4"></div>
+                    <div class="blade blade-5"></div>
+                    <div class="blade blade-6"></div>
+                  </div>
+                  
+                  <!-- Real BaseCase Photo Revealed Inside Aperture Center -->
+                  <div class="aperture-iris-container">
+                    <img src="photography by Adhitya/WhatsApp Image 2026-09-03 at 10.02.48 AM.jpeg" data-cloudinary-photo="heroLens" alt="BaseCase Revealed Aperture Frame" class="lens-photo-reveal" id="lensPhoto">
+                  </div>
+                </div>
+
+                <div class="lens-glass-reflection" id="lensReflection"></div>
+                <div class="lens-center-crosshair">+</div>
+              </div>
+            </div>
+
+            <div class="lens-micro-bottom micro-text">
+              <span>SHUTTER: 1/250 S</span>
+              <span>FRAME: 001 // BASECASE</span>
+            </div>
+          </div>
+
+          <!-- RIGHT COLUMN: Kinetic Oversized Typography -->
+          <div class="hero-typography-column">
+            <div class="hero-eyebrow micro-text">
+              <span class="step-num">01 /</span> ON-DEMAND CREATIVE PRODUCTION STUDIO
+            </div>
+            
+            <h1 class="hero-giant-title" data-scrub-text>
+              <span class="line-1">ON-DEMAND</span>
+              <span class="line-2 text-outline">CREATIVE</span>
+              <span class="line-3">PRODUCTION</span>
+            </h1>
+
+            <div class="hero-subtitle-row">
+              <p class="hero-desc">
+                We design and produce high-impact visual narratives across photography, cinematography, and post-production transformation. Built on precision optics, bold art direction, and dynamic visual density.
+              </p>
+              <div class="hero-scroll-hint micro-text">
+                SCROLL TO UNLOCK FOCUS <span class="scroll-arrow">↓</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="section-divider-line"></div>
+
+    <!-- 03. BASECASE IDENTITY & KINETIC TYPOGRAPHIC BANNER -->
+    <section class="editorial-section identity-strip-section" data-bg-color="#0a0b0e">
+      <div class="giant-marquee-wrapper">
+        <div class="giant-marquee-track" data-scrub-marquee data-scrub-speed="-40">
+          <span class="giant-text">BASECASE</span>
+          <span class="giant-dot">•</span>
+          <span class="giant-text text-outline">PHOTOGRAPHY</span>
+          <span class="giant-dot">•</span>
+          <span class="giant-text">VIDEOGRAPHY</span>
+          <span class="giant-dot">•</span>
+          <span class="giant-text text-outline">CINEMATOGRAPHY</span>
+          <span class="giant-dot">•</span>
+          <span class="giant-text">BASECASE</span>
+          <span class="giant-dot">•</span>
+        </div>
+      </div>
+    </section>
+
+    <div class="section-divider-line"></div>
+
+    <!-- 04. ADHITYA — PHOTOGRAPHER PROFILE (FACE-SAFE EDITORIAL SCENE) -->
+    <section class="editorial-section profile-editorial-section" id="adhitya-profile" data-bg-color="#101216">
+      <div class="section-container">
+        <div class="editorial-header-row">
+          <div class="editorial-tag micro-text">02 / LEAD PHOTOGRAPHER</div>
+          <div class="editorial-title-sub micro-text">ADHITYA — VISUAL & FRAMING DIRECTION</div>
+        </div>
+
+        <div class="profile-editorial-grid">
+          <!-- LEFT: Editorial Face-Safe Photo Presentation -->
+          <div class="profile-photo-wrapper face-safe-container" data-cursor="ADHITYA">
+            <div class="profile-photo-frame">
+              <!-- Using Adhitya.jpeg with object-fit contain to guarantee zero face cropping -->
+              <img src="photography by Adhitya/Adhitya.jpeg" data-cloudinary-photo="adhityaProfile1" alt="Adhitya — BaseCase Lead Photographer" class="profile-img face-safe-img">
+            </div>
+            <div class="profile-meta-caption micro-text">
+              <span>FIG. 01 — ADHITYA</span>
+              <span>CREATIVE DIRECTOR / PHOTOGRAPHER</span>
+            </div>
+          </div>
+
+          <!-- RIGHT: Editorial Statement & Secondary Face-Safe Profile Image -->
+          <div class="profile-info-column">
+            <h2 class="profile-huge-heading">
+              "WE DO NOT JUST CAPTURE LIGHT. WE COMMAND THE FRAME."
+            </h2>
+            <div class="thin-rule"></div>
+            
+            <p class="profile-bio-text">
+              Adhitya leads photography at BaseCase. Specializing in high-energy concert visuals, pristine naturescapes, corporate campaign imagery for Lenovo, and experimental photographic compositions. Every frame is crafted with deliberate focus, exposure geometry, and high-contrast editorial weight.
+            </p>
+
+            <div class="profile-secondary-frame face-safe-container" data-cursor="VIEW">
+              <!-- Secondary profile image: Adhitya (2).jpeg -->
+              <img src="photography by Adhitya/Adhitya (2).jpeg" data-cloudinary-photo="adhityaProfile2" alt="Adhitya in Action" class="profile-secondary-img face-safe-img">
+              <div class="frame-tag micro-text">FRAME 002 / ADHITYA IN FIELD</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="section-divider-line"></div>
+
+    <!-- 05. PHOTOGRAPHY ARTBOARD — 100% COMPLETE ASSET INTEGRATION (11/11 PHOTOS) -->
+    <section class="editorial-section photography-artboard-section" id="photography" data-bg-color="#07080a">
+      <div class="section-container">
+        <div class="editorial-header-row">
+          <div class="editorial-tag micro-text">03 / PHOTOGRAPHY PORTFOLIO</div>
+          <div class="editorial-title-sub micro-text">11 SELECT FRAMES // ADHITYA ARCHIVE</div>
+        </div>
+
+        <!-- Huge Typographic Backdrop Header -->
+        <h2 class="artboard-giant-heading" data-scrub-text>
+          PHOTOGRAPHY
+        </h2>
+
+        <!-- Category Micro Navigation Bar -->
+        <div class="photo-category-bar micro-text">
+          <span class="cat-pill active">ALL ARCHIVE (11)</span>
+          <span class="cat-pill">01 / CONCERT</span>
+          <span class="cat-pill">02 / NATURE</span>
+          <span class="cat-pill">03 / LENOVO</span>
+          <span class="cat-pill">04 / OTHER WORK</span>
+        </div>
+
+        <!-- Asymmetric Editorial Photography Composition Grid -->
+        <div class="editorial-photo-composition">
+          
+          <!-- Row 1: Massive Main Frame + Floating Overlapping Frame -->
+          <div class="editorial-photo-row row-hero-pair">
+            <div class="photo-item photo-large" data-cursor="VIEW" data-category="CONCERT">
+              <div class="media-frame">
+                <img src="photography by Adhitya/WhatsApp Image 2026-09-03 at 10.02.48 AM (1).jpeg" data-cloudinary-photo="photo01" alt="BaseCase Concert Photography Frame 01" loading="lazy">
+                <div class="media-hud micro-text">
+                  <span>01 / CONCERT</span>
+                  <span>RAW • 35MM</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="photo-item photo-floating-right" data-cursor="VIEW" data-category="NATURE">
+              <div class="media-frame">
+                <img src="photography by Adhitya/WhatsApp Image 2026-09-03 at 10.02.49 AM.jpeg" data-cloudinary-photo="photo02" alt="BaseCase Nature Photography Frame 02" loading="lazy">
+                <div class="media-hud micro-text">
+                  <span>02 / NATURE</span>
+                  <span>ATMOSPHERE</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="thin-rule"></div>
+
+          <!-- Row 2: 3-Column Asymmetric Vertical Frames -->
+          <div class="editorial-photo-row row-trio">
+            <div class="photo-item photo-tall" data-cursor="VIEW" data-category="CONCERT">
+              <div class="media-frame">
+                <img src="photography by Adhitya/WhatsApp Image 2026-09-03 at 10.02.49 AM (1).jpeg" data-cloudinary-photo="photo03" alt="BaseCase Concert Stage Lighting Frame 03" loading="lazy">
+                <div class="media-hud micro-text">
+                  <span>03 / CONCERT</span>
+                  <span>STAGE LIGHTING</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="photo-item photo-center-wide" data-cursor="VIEW" data-category="LENOVO">
+              <div class="media-frame">
+                <img src="photography by Adhitya/WhatsApp Image 2026-09-03 at 10.03.12 AM.jpeg" data-cloudinary-photo="photo04" alt="BaseCase Lenovo Project Frame 04" loading="lazy">
+                <div class="media-hud micro-text">
+                  <span>04 / LENOVO</span>
+                  <span>COMMERCIAL</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="photo-item photo-tall" data-cursor="VIEW" data-category="NATURE">
+              <div class="media-frame">
+                <img src="photography by Adhitya/WhatsApp Image 2026-09-03 at 10.03.12 AM (1).jpeg" data-cloudinary-photo="photo05" alt="BaseCase Nature Frame 05" loading="lazy">
+                <div class="media-hud micro-text">
+                  <span>05 / NATURE</span>
+                  <span>EXPOSURE</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="thin-rule"></div>
+
+          <!-- Row 3: Interlocking Landscape + Oversized Micro-Text Callout -->
+          <div class="editorial-photo-row row-interlock">
+            <div class="photo-item photo-wide-bleed" data-cursor="VIEW" data-category="OTHER WORK">
+              <div class="media-frame">
+                <img src="photography by Adhitya/WhatsApp Image 2026-09-03 at 10.22.00 AM.jpeg" data-cloudinary-photo="photo06" alt="BaseCase Other Work Frame 06" loading="lazy">
+                <div class="media-hud micro-text">
+                  <span>06 / OTHER WORK</span>
+                  <span>EDITORIAL COMPOSITION</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="editorial-quote-card">
+              <div class="quote-tag micro-text">OPTICAL ARCHIVE // 07</div>
+              <p class="quote-text">
+                "STILL IMAGES CONTAIN THE MOTION OF THE MOMENT BEFORE AND AFTER THE SHUTTER OPENS."
+              </p>
+              <div class="photo-item photo-small-embedded" data-cursor="VIEW" data-category="OTHER WORK">
+                <div class="media-frame">
+                  <img src="photography by Adhitya/WhatsApp Image 2026-09-03 at 10.22.00 AM (1).jpeg" data-cloudinary-photo="photo07" alt="BaseCase Other Work Frame 07" loading="lazy">
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Row 4: Final Large Editorial Anchor Frame -->
+          <div class="editorial-photo-row row-anchor">
+            <div class="photo-item photo-full-banner" data-cursor="VIEW" data-category="CONCERT">
+              <div class="media-frame">
+                <img src="photography by Adhitya/WhatsApp Image 2026-09-03 at 10.31.11 AM.jpeg" data-cloudinary-photo="photo08" alt="BaseCase Final Archive Frame 08" loading="lazy">
+                <div class="media-hud micro-text">
+                  <span>08 / CONCERT & STAGE</span>
+                  <span>MAX DENSITY FRAME</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <div class="section-divider-line"></div>
+
+    <!-- 06. PHOTO → FRAME → MOTION TRANSITION SCENE -->
+    <section class="editorial-section transition-filmstrip-section" data-bg-color="#050608">
+      <div class="filmstrip-wrapper">
+        <div class="filmstrip-header micro-text">
+          <span>TRANSFORMATION SEQUENCE</span>
+          <span>STILL FRAME <span class="rec-dot">●</span> MOTION VIDEO</span>
+        </div>
+        
+        <div class="filmstrip-track" data-scrub-marquee data-scrub-speed="-50">
+          <div class="film-cell"><span>FRAME 001</span></div>
+          <div class="film-cell"><span>FRAME 002</span></div>
+          <div class="film-cell active-cell"><span>24 FPS</span></div>
+          <div class="film-cell"><span>MOTION</span></div>
+          <div class="film-cell"><span>SEQUENCE</span></div>
+          <div class="film-cell active-cell"><span>REC ●</span></div>
+          <div class="film-cell"><span>VIDEO</span></div>
+        </div>
+      </div>
+    </section>
+
+    <div class="section-divider-line"></div>
+
+    <!-- 07. FEATURED PROJECT — TVS MOTOR COMPANY VIDEO PRODUCTION (001 / TVS.mp4) -->
+    <section class="editorial-section featured-project-section" id="tvs-featured" data-bg-color="#070a12">
+      <div class="section-container">
+        <div class="editorial-header-row">
+          <div class="editorial-tag micro-text">04 / FEATURED CINEMATIC PROJECT</div>
+          <div class="editorial-title-sub micro-text">001 // TVS MOTOR COMPANY — COMMERCIAL PRODUCTION</div>
+        </div>
+
+        <div class="featured-project-layout">
+          <!-- Left Giant Metadata & Typography -->
+          <div class="featured-info-col">
+            <div class="featured-num micro-text">PROJECT 001</div>
+            <h2 class="featured-title">TVS REEL</h2>
+            <div class="featured-tags micro-text">
+              <span>AUTOMOTIVE</span>
+              <span>COMMERCIAL</span>
+              <span>CINEMATOGRAPHY</span>
+              <span>COLOR GRADING</span>
+            </div>
+
+            <p class="featured-description">
+              High-velocity commercial reel produced and edited by BaseCase for TVS. Combining multi-angle camera tracking, rapid pace editorial cutting, sound sync, and heavy visual color control.
+            </p>
+
+            <div class="featured-specs micro-text">
+              <div><span>ROLE:</span> SHOOTING + EDITING</div>
+              <div><span>FORMAT:</span> 4K RAW CINEMA</div>
+              <div><span>LOCATION:</span> TEST TRACK / STUDIO</div>
+            </div>
+          </div>
+
+          <!-- Right Full-Viewport Featured Video Frame (EXACT TVS.mp4 VIDEO PLAYER) -->
+          <div class="featured-video-col" data-cursor="PLAY">
+            <div class="featured-video-wrapper media-frame">
+              <video src="Videography by Kushal/TVS.mp4" data-cloudinary-video="tvs" controls autoplay muted loop playsinline preload="metadata" class="basecase-video-player featured-tvs-player"></video>
+              <div class="video-hud micro-text">
+                <span class="rec-dot">●</span> TVS / FEATURED REEL
+                <span>4K CINEMA</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="section-divider-line"></div>
+
+    <!-- 08. VIDEOGRAPHY ARTBOARD — EXACTLY 7 ADDITIONAL UNIQUE VIDEOS (8 TOTAL WITH TVS) -->
+    <section class="editorial-section videography-artboard-section" id="videography" data-bg-color="#06070a">
+      <div class="section-container">
+        <div class="editorial-header-row">
+          <div class="editorial-tag micro-text">05 / VIDEOGRAPHY ARCHIVE</div>
+          <div class="editorial-title-sub micro-text">7 UNIQUE WORKS // KUSHAL ARCHIVE</div>
+        </div>
+
+        <!-- Huge Typographic Backdrop Header -->
+        <h2 class="artboard-giant-heading" data-scrub-text>
+          VIDEOGRAPHY
+        </h2>
+
+        <!-- Asymmetrical Editorial Video Composition (7 Unique Video Works) -->
+        <div class="editorial-video-grid">
+
+          <!-- Video Work 02: A2496 -->
+          <div class="video-grid-item item-wide" data-cursor="PLAY">
+            <div class="media-frame">
+              <video src="Videography by Kushal/A2496.MP4" data-cloudinary-video="a2496" controls preload="metadata" loop muted playsinline class="basecase-video-player"></video>
+              <div class="media-hud micro-text">
+                <span>VIDEO WORK 02 / A2496</span>
+                <span>MOTION CINEMA</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Video Work 03: A2594 & Video Work 04: A2629 -->
+          <div class="video-grid-item item-medium" data-cursor="PLAY">
+            <div class="media-frame">
+              <video src="Videography by Kushal/A2594.MP4" data-cloudinary-video="a2594" controls preload="metadata" loop muted playsinline class="basecase-video-player"></video>
+              <div class="media-hud micro-text">
+                <span>VIDEO WORK 03 / A2594</span>
+                <span>CINEMATIC SEQUENCE</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="video-grid-item item-medium" data-cursor="PLAY">
+            <div class="media-frame">
+              <video src="Videography by Kushal/A2629.MP4" data-cloudinary-video="a2629" controls preload="metadata" loop muted playsinline class="basecase-video-player"></video>
+              <div class="media-hud micro-text">
+                <span>VIDEO WORK 04 / A2629</span>
+                <span>COMMERCIAL REEL</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Video Work 05: C0522 -->
+          <div class="video-grid-item item-wide" data-cursor="PLAY">
+            <div class="media-frame">
+              <video src="Videography by Kushal/C0522.MP4" data-cloudinary-video="c0522" controls preload="metadata" loop muted playsinline class="basecase-video-player"></video>
+              <div class="media-hud micro-text">
+                <span>VIDEO WORK 05 / C0522</span>
+                <span>STAGE & LIGHTING</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Video Work 06: C5082 & Video Work 07: C5086 -->
+          <div class="video-grid-item item-medium" data-cursor="PLAY">
+            <div class="media-frame">
+              <video src="Videography by Kushal/C5082.MP4" data-cloudinary-video="c5082" controls preload="metadata" loop muted playsinline class="basecase-video-player"></video>
+              <div class="media-hud micro-text">
+                <span>VIDEO WORK 06 / C5082</span>
+                <span>EXPOSURE MOTION</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="video-grid-item item-medium" data-cursor="PLAY">
+            <div class="media-frame">
+              <video src="Videography by Kushal/C5086.MP4" data-cloudinary-video="c5086" controls preload="metadata" loop muted playsinline class="basecase-video-player"></video>
+              <div class="media-hud micro-text">
+                <span>VIDEO WORK 07 / C5086</span>
+                <span>TRACKING SHOT</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Video Work 08: A2423 Anchor Frame -->
+          <div class="video-grid-item item-wide" data-cursor="PLAY">
+            <div class="media-frame">
+              <video src="Videography by Kushal/A2423.MP4" data-cloudinary-video="a2423" controls preload="metadata" loop muted playsinline class="basecase-video-player"></video>
+              <div class="media-hud micro-text">
+                <span>VIDEO WORK 08 / A2423</span>
+                <span>LIVE PERFORMANCE REEL</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <div class="section-divider-line"></div>
+
+    <!-- 09. KUSHAL — VIDEOGRAPHER PROFILE (FACE-SAFE EDITORIAL SCENE) -->
+    <section class="editorial-section profile-editorial-section" id="kushal-profile" data-bg-color="#0f1117">
+      <div class="section-container">
+        <div class="editorial-header-row">
+          <div class="editorial-tag micro-text">06 / LEAD VIDEOGRAPHER</div>
+          <div class="editorial-title-sub micro-text">KUSHAL — CINEMATOGRAPHY & EDITORIAL DIRECTION</div>
+        </div>
+
+        <div class="profile-editorial-grid">
+          <!-- LEFT: Editorial Info & Quote -->
+          <div class="profile-info-column">
+            <h2 class="profile-huge-heading">
+              "CINEMA IS RHYTHM, SPEED, AND UNCOMPROMISING PRECISION."
+            </h2>
+            <div class="thin-rule"></div>
+
+            <p class="profile-bio-text">
+              Kushal directs videography and post-production at BaseCase. Managing end-to-end commercial video reels, live performance capturing, motion tracking, and high-energy brand campaigns like TVS Motor Company. He transforms raw camera feeds into tightly paced visual sequences.
+            </p>
+
+            <div class="profile-secondary-frame face-safe-container" data-cursor="VIEW">
+              <!-- Secondary profile image: Kushal(1).JPG.jpeg -->
+              <img src="Videography by Kushal/Kushal(1).JPG.jpeg" data-cloudinary-photo="kushalProfile2" alt="Kushal On Set" class="profile-secondary-img face-safe-img">
+              <div class="frame-tag micro-text">FRAME 002 / KUSHAL ON SET</div>
+            </div>
+          </div>
+
+          <!-- RIGHT: Face-Safe Main Profile Photo -->
+          <div class="profile-photo-wrapper face-safe-container" data-cursor="KUSHAL">
+            <div class="profile-photo-frame">
+              <!-- Using Kushal.JPG.jpeg with object-fit contain to guarantee zero face cropping -->
+              <img src="Videography by Kushal/Kushal.JPG.jpeg" data-cloudinary-photo="kushalProfile1" alt="Kushal — BaseCase Lead Videographer" class="profile-img face-safe-img">
+            </div>
+            <div class="profile-meta-caption micro-text">
+              <span>FIG. 02 — KUSHAL</span>
+              <span>CINEMATOGRAPHER / EDITOR</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <div class="section-divider-line"></div>
+
+    <!-- 10. EDITORIAL SERVICES SEQUENCE (NO CARDS, LARGE KINETIC SEQUENCE) -->
+    <section class="editorial-section services-editorial-section" id="services" data-bg-color="#08090d">
+      <div class="section-container">
+        <div class="editorial-header-row">
+          <div class="editorial-tag micro-text">07 / CORE CAPABILITIES</div>
+          <div class="editorial-title-sub micro-text">EDITORIAL PRODUCTION & POST-PROCESSING</div>
+        </div>
+
+        <div class="services-continuous-list">
+
+          <!-- Service 01 -->
+          <div class="service-row-item">
+            <div class="service-meta micro-text">
+              <span class="service-num">01 /</span>
+              <span class="service-concept">FRAME / LIGHT / COMPOSITION</span>
+            </div>
+            <div class="service-title-wrap">
+              <h3 class="service-title">PHOTOGRAPHY</h3>
+              <span class="service-badge micro-text">CORE CAPABILITY</span>
+            </div>
+            <p class="service-desc">
+              On-location and studio editorial photography. High-density concert coverage, brand campaigns, naturescapes, and commercial imagery with raw optic fidelity.
+            </p>
+          </div>
+
+          <div class="thin-rule"></div>
+
+          <!-- Service 02 -->
+          <div class="service-row-item">
+            <div class="service-meta micro-text">
+              <span class="service-num">02 /</span>
+              <span class="service-concept">FRAME / MOTION / SEQUENCE</span>
+            </div>
+            <div class="service-title-wrap">
+              <h3 class="service-title">VIDEOGRAPHY</h3>
+              <span class="service-badge micro-text">CORE CAPABILITY</span>
+            </div>
+            <p class="service-desc">
+              Full-scale video production, automotive shoots, music reels, and commercial campaigns. High-speed camera work, multi-cam setups, and cinematic lighting.
+            </p>
+          </div>
+
+          <div class="thin-rule"></div>
+
+          <!-- Service 03 -->
+          <div class="service-row-item">
+            <div class="service-meta micro-text">
+              <span class="service-num">03 /</span>
+              <span class="service-concept">FOCUS / TRANSFORMATION</span>
+            </div>
+            <div class="service-title-wrap">
+              <h3 class="service-title">PHOTO EDITING</h3>
+              <span class="service-badge micro-text">ADDITIONAL PAID SERVICE</span>
+            </div>
+            <p class="service-desc">
+              Advanced color grading, raw exposure balancing, retouching, skin discipline, and editorial grain synthesis for still imagery archives.
+            </p>
+          </div>
+
+          <div class="thin-rule"></div>
+
+          <!-- Service 04 -->
+          <div class="service-row-item">
+            <div class="service-meta micro-text">
+              <span class="service-num">04 /</span>
+              <span class="service-concept">MOTION / CUT / TIMELINE</span>
+            </div>
+            <div class="service-title-wrap">
+              <h3 class="service-title">VIDEO EDITING</h3>
+              <span class="service-badge micro-text">ADDITIONAL PAID SERVICE</span>
+            </div>
+            <p class="service-desc">
+              Precision pace cutting, sound design integration, motion graphics, DaVinci Resolve color pipelines, and high-energy reel assembly.
+            </p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <div class="section-divider-line"></div>
+
+    <!-- 11. ELECTRIC BLUE FULL-SCREEN VISUAL CHAPTER ("STILL IS NEVER STILL.") -->
+    <section class="editorial-section blue-chapter-section" data-bg-color="#0044ff">
+      <div class="blue-chapter-inner">
+        <div class="blue-meta micro-text">
+          <span>CHAPTER 08 // VISUAL RESET</span>
+          <span>ELECTRIC BLUE FIELD</span>
+        </div>
+
+        <h2 class="blue-giant-statement" data-scrub-text>
+          STILL IS NEVER STILL.
+        </h2>
+
+        <p class="blue-subtext">
+          WE TRANSFORM STATIC OPTICS INTO CONTINUOUS MOTION.
+        </p>
+
+        <div class="blue-hud-bottom micro-text">
+          <span>BASECASE STUDIO</span>
+          <span>OPTICAL PRECISION</span>
+        </div>
+      </div>
+    </section>
+
+    <div class="section-divider-line"></div>
+
+    <!-- 12. BLACK TYPOGRAPHIC CHAPTER ("FRAME • FRAME • FRAME") -->
+    <section class="editorial-section black-chapter-section" data-bg-color="#050505">
+      <div class="giant-marquee-wrapper">
+        <div class="giant-marquee-track" data-scrub-marquee data-scrub-speed="-60">
+          <span class="giant-text">FRAME</span>
+          <span class="giant-dot">•</span>
+          <span class="giant-text text-outline">FOCUS</span>
+          <span class="giant-dot">•</span>
+          <span class="giant-text">LIGHT</span>
+          <span class="giant-dot">•</span>
+          <span class="giant-text text-outline">MOTION</span>
+          <span class="giant-dot">•</span>
+          <span class="giant-text">BASECASE</span>
+          <span class="giant-dot">•</span>
+        </div>
+      </div>
+    </section>
+
+    <div class="section-divider-line"></div>
+
+    <!-- 13. FINAL EDITORIAL CONTACT & FOOTER ("LET'S MAKE SOMETHING.") -->
+    <section class="editorial-section contact-editorial-section" id="contact" data-bg-color="#08080a">
+      <div class="section-container">
+        <div class="editorial-header-row">
+          <div class="editorial-tag micro-text">09 / START A PRODUCTION</div>
+          <div class="editorial-title-sub micro-text">DIRECT CONTACT & INQUIRIES</div>
+        </div>
+
+        <div class="contact-editorial-layout">
+          <!-- Left Headline -->
+          <div class="contact-main-col">
+            <h2 class="contact-huge-headline">
+              LET'S MAKE<br>
+              <span class="text-outline">SOMETHING.</span>
+            </h2>
+            <p class="contact-lead-p">
+              Ready to elevate your project with cinematic videography, high-contrast photography, or post-production editing? Contact our studio leads directly.
+            </p>
+          </div>
+
+          <!-- Right Direct Contact Links -->
+          <div class="contact-details-col">
+            
+            <!-- Kushal Contact Box -->
+            <div class="contact-person-block">
+              <div class="person-role micro-text">VIDEOGRAPHER / CINEMATOGRAPHER</div>
+              <h3 class="person-name">KUSHAL</h3>
+              <a href="tel:7892266090" class="contact-link-phone" data-cursor="CALL">
+                <span class="link-label micro-text">PHONE:</span>
+                <span class="link-val">+91 7892266090</span>
+              </a>
+            </div>
+
+            <div class="thin-rule"></div>
+
+            <!-- Adhitya Contact Box -->
+            <div class="contact-person-block">
+              <div class="person-role micro-text">PHOTOGRAPHER / VISUAL DIRECTOR</div>
+              <h3 class="person-name">ADHITYA</h3>
+              <a href="tel:6362775822" class="contact-link-phone" data-cursor="CALL">
+                <span class="link-label micro-text">PHONE:</span>
+                <span class="link-val">+91 6362775822</span>
+              </a>
+            </div>
+
+            <div class="thin-rule"></div>
+
+            <!-- Email Direct Link -->
+            <div class="contact-email-block">
+              <div class="person-role micro-text">STUDIO EMAIL</div>
+              <a href="mailto:madebybasecase@gmail.com" class="contact-link-email" data-cursor="EMAIL">
+                madebybasecase@gmail.com
+              </a>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- 14. BASECASE FOOTER — FINAL ART BOOK PAGE -->
+        <footer class="px-footer">
+          <div class="footer-top-row">
+            <div class="footer-logo-wrap">
+              <img src="Basecase.png" data-cloudinary-photo="logo" alt="BaseCase Logo" class="footer-logo-img">
+            </div>
+            <div class="footer-meta micro-text">
+              <span>ALL RIGHTS RESERVED © 2026 BASECASE</span>
+              <span>BANGALORE / INDIA</span>
+            </div>
+          </div>
+
+          <div class="footer-giant-title">
+            BASECASE
+          </div>
+
+          <div class="footer-bottom-credits micro-text">
+            <span>PHOTOGRAPHY BY ADHITYA</span>
+            <span>VIDEOGRAPHY BY KUSHAL</span>
+            <span>DESIGN LANGUAGE inspired by PX PUSH</span>
+          </div>
+        </footer>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Script File -->
+  <script src="app.js"></script>
+</body>
+</html>

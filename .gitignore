@@ -1,0 +1,18 @@
+# Secret environment files
+.env
+.env.local
+
+# Heavy local raw media (hosted on Cloudinary CDN)
+Videography by Kushal/
+photography by Adhitya/
+
+# Temporary helper scripts
+*.ps1
+Kushal_compressed.jpg
+Kushal1_compressed.jpg
+Kushal.jpg
+Kushal1.jpg
+
+# Operating System Files
+.DS_Store
+Thumbs.db

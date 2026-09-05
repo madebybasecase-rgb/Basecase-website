@@ -1,0 +1,11 @@
+{
+  "name": "basecase-visuals",
+  "version": "1.0.0",
+  "description": "Basecase Freelance Videography by Kushal & Photography by Adhitya Studio Platform",
+  "main": "index.html",
+  "scripts": {
+    "start": "npx serve ."
+  },
+  "author": "Kushal & Adhitya",
+  "license": "ISC"
+}

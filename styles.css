@@ -1,0 +1,1224 @@
+/* ==========================================================================
+   BASECASE — MASTER REBUILD DESIGN SYSTEM
+   PX PUSH-INSPIRED VISUAL LANGUAGE, EDITORIAL COMPOSITION & ART DIRECTION
+   ========================================================================== */
+
+/* 1. RESET & BASE VARIABLES */
+:root {
+  --color-black: #050505;
+  --color-charcoal-dark: #0a0b0e;
+  --color-charcoal-mid: #101216;
+  --color-charcoal-light: #181a20;
+  --color-metallic: #2a2d34;
+  --color-offwhite: #f2f3f5;
+  --color-purewhite: #ffffff;
+  --color-muted: #8e94a0;
+  --color-blue: #0044ff;
+  --color-blue-dark: #05102e;
+  --color-rec: #ff3b30;
+
+  --rule-color: rgba(255, 255, 255, 0.12);
+  --rule-color-subtle: rgba(255, 255, 255, 0.06);
+
+  --font-display: 'Space Grotesk', sans-serif;
+  --font-editorial: 'Plus Jakarta Sans', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  --header-height: 54px;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  background-color: var(--color-black);
+  color: var(--color-offwhite);
+  font-family: var(--font-editorial);
+  font-size: 16px;
+  line-height: 1.5;
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background-color: var(--color-black);
+  color: var(--color-offwhite);
+  overflow-x: hidden;
+  transition: background-color 0.6s ease;
+  position: relative;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img, video {
+  display: block;
+  max-width: 100%;
+}
+
+/* 2. PERSISTENT TEXTURE OVERLAYS */
+.film-grain {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 999;
+  opacity: 0.045;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+.vignette-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 998;
+  background: radial-gradient(circle at center, transparent 50%, rgba(0,0,0,0.65) 100%);
+}
+
+/* 3. CUSTOM MICRO CURSOR */
+.custom-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 8px;
+  height: 8px;
+  background-color: var(--color-purewhite);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 10000;
+  transform: translate(-50%, -50%);
+  transition: width 0.2s ease, height 0.2s ease, background-color 0.2s ease, border-radius 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  mix-blend-mode: difference;
+}
+
+.custom-cursor.active {
+  width: 56px;
+  height: 24px;
+  border-radius: 2px;
+  background-color: var(--color-blue);
+  mix-blend-mode: normal;
+}
+
+.cursor-badge {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--color-purewhite);
+  letter-spacing: 0.08em;
+  display: none;
+}
+
+.custom-cursor.active .cursor-badge {
+  display: block;
+}
+
+/* 4. UTILITY TYPOGRAPHY & HUD LABELS */
+.micro-text {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+
+.rec-dot {
+  color: var(--color-rec);
+  animation: pulse-rec 1.4s infinite alternate;
+}
+
+@keyframes pulse-rec {
+  0% { opacity: 0.3; }
+  100% { opacity: 1; }
+}
+
+.thin-rule {
+  width: 100%;
+  height: 1px;
+  background-color: var(--rule-color);
+  margin: 2rem 0;
+}
+
+.section-divider-line {
+  width: 100%;
+  height: 1px;
+  background-color: var(--rule-color);
+}
+
+.text-outline {
+  color: transparent;
+  -webkit-text-stroke: 1.5px var(--color-offwhite);
+}
+
+/* 5. MINIMAL FIXED HEADER */
+.px-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: var(--header-height);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2rem;
+  background-color: rgba(5, 5, 5, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--rule-color);
+  z-index: 1000;
+}
+
+.px-header-left .px-header-logo img {
+  height: 24px;
+  width: auto;
+  object-fit: contain;
+}
+
+.px-header-center {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.px-header-right {
+  display: flex;
+  align-items: center;
+  gap: 1.75rem;
+}
+
+.px-nav-item {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  color: var(--color-muted);
+  transition: color 0.25s ease;
+}
+
+.px-nav-item:hover {
+  color: var(--color-purewhite);
+}
+
+/* 6. TOP MARQUEE TICKER BANNER */
+.top-marquee-banner {
+  margin-top: var(--header-height);
+  width: 100%;
+  background-color: var(--color-charcoal-dark);
+  border-bottom: 1px solid var(--rule-color);
+  overflow: hidden;
+  padding: 0.5rem 0;
+  white-space: nowrap;
+}
+
+.marquee-track {
+  display: inline-flex;
+  gap: 2rem;
+}
+
+.marquee-item {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  color: var(--color-muted);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* 7. CONTINUOUS ARTBOARD CONTAINER */
+.continuous-artboard {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.editorial-section {
+  width: 100%;
+  padding: 6rem 2rem;
+  position: relative;
+}
+
+.section-container {
+  max-width: 1440px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.editorial-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--rule-color);
+  padding-bottom: 0.75rem;
+  margin-bottom: 3.5rem;
+}
+
+.editorial-tag {
+  color: var(--color-blue);
+  font-weight: 700;
+}
+
+/* 8. HERO SECTION & INTERACTIVE CAMERA LENS OBJECT */
+.hero-editorial {
+  min-height: calc(100vh - var(--header-height));
+  padding-top: 3.5rem;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+.hero-cloud-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.hero-container {
+  position: relative;
+  z-index: 1;
+}
+
+.hero-meta-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--rule-color);
+  padding-bottom: 0.75rem;
+  margin-bottom: 3rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.hud-tag {
+  color: var(--color-blue);
+  font-weight: 700;
+}
+
+.hero-grid-two-col {
+  display: grid;
+  grid-template-columns: 420px 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+/* SIGNATURE LENS / APERTURE OBJECT */
+.hero-lens-column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.lens-micro-labels, .lens-micro-bottom {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  margin: 0.75rem 0;
+}
+
+.basecase-lens-wrapper {
+  width: 380px;
+  height: 380px;
+  position: relative;
+  perspective: 1000px;
+  cursor: pointer;
+}
+
+.lens-chassis {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #2a2d34 0%, #121316 65%, #050505 100%);
+  box-shadow: 0 0 60px rgba(0,0,0,0.9), inset 0 0 15px rgba(255,255,255,0.15);
+  border: 2px solid rgba(255,255,255,0.15);
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.15s ease-out;
+  transform-style: preserve-3d;
+}
+
+.lens-ring-outer {
+  position: absolute;
+  width: 92%;
+  height: 92%;
+  border-radius: 50%;
+  border: 1px dashed rgba(255,255,255,0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.lens-knurling-ring {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  box-shadow: inset 0 0 10px rgba(0,0,0,0.8);
+}
+
+.lens-focus-mark {
+  position: absolute;
+  top: 10px;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  color: var(--color-blue);
+  letter-spacing: 0.1em;
+  font-weight: 700;
+}
+
+.lens-ring-inner {
+  position: absolute;
+  width: 76%;
+  height: 76%;
+  border-radius: 50%;
+  background: #08090b;
+  border: 1px solid rgba(255,255,255,0.15);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.aperture-blades-mask {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.aperture-iris-container {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  overflow: hidden;
+  position: relative;
+}
+
+.lens-photo-reveal {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  clip-path: circle(22% at 50% 50%);
+  filter: blur(8px) brightness(0.6);
+  transition: clip-path 0.3s ease, filter 0.3s ease, transform 0.3s ease;
+  transform: scale(1.3);
+}
+
+.basecase-lens-wrapper:hover .lens-photo-reveal {
+  clip-path: circle(55% at 50% 50%);
+  filter: blur(0px) brightness(1);
+  transform: scale(1.1);
+}
+
+.lens-glass-reflection {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: linear-gradient(135deg, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0) 45%, rgba(0,68,255,0.15) 100%);
+  pointer-events: none;
+  z-index: 3;
+}
+
+.lens-center-crosshair {
+  position: absolute;
+  font-family: var(--font-mono);
+  font-size: 14px;
+  color: rgba(255,255,255,0.3);
+  pointer-events: none;
+  z-index: 4;
+}
+
+/* HERO RIGHT TYPOGRAPHY */
+.hero-typography-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.hero-eyebrow {
+  margin-bottom: 1rem;
+  color: var(--color-blue);
+  font-weight: 700;
+}
+
+.hero-giant-title {
+  font-family: var(--font-display);
+  font-size: clamp(3.2rem, 6.5vw, 7.5rem);
+  font-weight: 800;
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 2rem;
+}
+
+.hero-subtitle-row {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+.hero-desc {
+  max-width: 520px;
+  font-size: 1.1rem;
+  color: var(--color-muted);
+  line-height: 1.6;
+}
+
+.hero-scroll-hint {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--color-offwhite);
+  white-space: nowrap;
+}
+
+.scroll-arrow {
+  color: var(--color-blue);
+  font-weight: 700;
+}
+
+/* 9. IDENTITY KINETIC MARQUEE STRIP */
+.identity-strip-section {
+  padding: 3rem 0;
+  overflow: hidden;
+  border-top: 1px solid var(--rule-color);
+  border-bottom: 1px solid var(--rule-color);
+}
+
+.giant-marquee-wrapper {
+  width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.giant-marquee-track {
+  display: inline-flex;
+  align-items: center;
+  gap: 2.5rem;
+}
+
+.giant-text {
+  font-family: var(--font-display);
+  font-size: clamp(3.5rem, 8vw, 9rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+}
+
+.giant-dot {
+  font-size: 3rem;
+  color: var(--color-blue);
+}
+
+/* 10. ADHITYA & KUSHAL PROFILE EDITORIAL SCENES (FACE-SAFE GUARANTEE) */
+.profile-editorial-section {
+  padding: 7rem 2rem;
+}
+
+.profile-editorial-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+.face-safe-container {
+  width: 100%;
+  background: var(--color-charcoal-dark);
+  border: 1px solid var(--rule-color);
+  padding: 1.5rem;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.profile-photo-frame {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background-color: #08090c;
+}
+
+/* NON-NEGOTIABLE: Face must remain 100% visible, no crop */
+.face-safe-img {
+  width: 100%;
+  height: auto;
+  max-height: 560px;
+  object-fit: contain;
+  border-radius: 0;
+  transition: transform 0.5s ease;
+}
+
+.face-safe-container:hover .face-safe-img {
+  transform: scale(1.02);
+}
+
+.profile-meta-caption {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--rule-color-subtle);
+}
+
+.profile-info-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.profile-huge-heading {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 3.5vw, 3.8rem);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+}
+
+.profile-bio-text {
+  font-size: 1.15rem;
+  color: var(--color-muted);
+  line-height: 1.75;
+  margin-bottom: 2.5rem;
+}
+
+.profile-secondary-frame {
+  max-width: 380px;
+}
+
+.profile-secondary-img {
+  max-height: 280px;
+}
+
+.frame-tag {
+  margin-top: 0.75rem;
+  width: 100%;
+  text-align: left;
+}
+
+/* 11. PHOTOGRAPHY ARTBOARD & ASYMMETRIC LAYOUT (100% COMPLETE 11/11 PHOTOS) */
+.photography-artboard-section {
+  padding: 8rem 2rem;
+}
+
+.artboard-giant-heading {
+  font-family: var(--font-display);
+  font-size: clamp(4rem, 12vw, 13rem);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.06);
+  margin-bottom: -2.5rem;
+  pointer-events: none;
+  user-select: none;
+}
+
+.photo-category-bar {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 4rem;
+  flex-wrap: wrap;
+}
+
+.cat-pill {
+  padding: 0.5rem 1.25rem;
+  border: 1px solid var(--rule-color);
+  background: rgba(255,255,255,0.02);
+  color: var(--color-muted);
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.cat-pill.active, .cat-pill:hover {
+  background: var(--color-blue);
+  color: var(--color-purewhite);
+  border-color: var(--color-blue);
+}
+
+.editorial-photo-composition {
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+}
+
+.editorial-photo-row {
+  display: grid;
+  gap: 3rem;
+  width: 100%;
+}
+
+.row-hero-pair {
+  grid-template-columns: 1.8fr 1fr;
+  align-items: center;
+}
+
+.row-trio {
+  grid-template-columns: 1fr 1.6fr 1fr;
+  align-items: center;
+}
+
+.row-interlock {
+  grid-template-columns: 2fr 1fr;
+  align-items: center;
+}
+
+.row-anchor {
+  grid-template-columns: 1fr;
+}
+
+.media-frame {
+  position: relative;
+  background: #000;
+  border: 1px solid var(--rule-color);
+  overflow: hidden;
+}
+
+.media-frame img, .media-frame video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.media-frame:hover img, .media-frame:hover video {
+  transform: scale(1.04);
+}
+
+.media-hud {
+  position: absolute;
+  bottom: 12px;
+  left: 12px;
+  right: 12px;
+  display: flex;
+  justify-content: space-between;
+  background: rgba(5, 5, 5, 0.85);
+  backdrop-filter: blur(8px);
+  padding: 0.4rem 0.75rem;
+  border: 1px solid rgba(255,255,255,0.15);
+  pointer-events: none;
+  z-index: 5;
+}
+
+.photo-large {
+  min-height: 520px;
+}
+
+.photo-floating-right {
+  min-height: 400px;
+}
+
+.photo-tall {
+  min-height: 480px;
+}
+
+.photo-center-wide {
+  min-height: 380px;
+}
+
+.photo-wide-bleed {
+  min-height: 460px;
+}
+
+.photo-full-banner {
+  min-height: 600px;
+}
+
+.editorial-quote-card {
+  padding: 2.5rem;
+  background: var(--color-charcoal-mid);
+  border: 1px solid var(--rule-color);
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.quote-text {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  font-weight: 700;
+  line-height: 1.35;
+  text-transform: uppercase;
+}
+
+.photo-small-embedded {
+  height: 220px;
+}
+
+/* 12. FILMSTRIP TRANSITION SECTION */
+.transition-filmstrip-section {
+  padding: 4rem 0;
+  background-color: var(--color-black);
+  border-top: 1px solid var(--rule-color);
+  border-bottom: 1px solid var(--rule-color);
+  overflow: hidden;
+}
+
+.filmstrip-header {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 2rem 1.5rem 2rem;
+}
+
+.filmstrip-track {
+  display: flex;
+  gap: 1.5rem;
+  white-space: nowrap;
+}
+
+.film-cell {
+  padding: 1.5rem 3.5rem;
+  border: 1px solid var(--rule-color);
+  background: var(--color-charcoal-dark);
+  font-family: var(--font-mono);
+  font-size: 14px;
+  letter-spacing: 0.15em;
+  color: var(--color-muted);
+}
+
+.film-cell.active-cell {
+  background: var(--color-blue);
+  color: var(--color-purewhite);
+  border-color: var(--color-blue);
+}
+
+/* 13. FEATURED PROJECT (TVS REEL) */
+.featured-project-section {
+  padding: 8rem 2rem;
+}
+
+.featured-project-layout {
+  display: grid;
+  grid-template-columns: 1fr 1.8fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+.featured-info-col {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.featured-num {
+  color: var(--color-blue);
+  font-weight: 700;
+}
+
+.featured-title {
+  font-family: var(--font-display);
+  font-size: clamp(3rem, 6vw, 6rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 0.95;
+}
+
+.featured-tags {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.featured-tags span {
+  padding: 0.25rem 0.75rem;
+  border: 1px solid var(--rule-color);
+  background: rgba(255,255,255,0.03);
+}
+
+.featured-description {
+  font-size: 1.1rem;
+  color: var(--color-muted);
+  line-height: 1.65;
+}
+
+.featured-specs {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--rule-color-subtle);
+}
+
+.featured-specs span {
+  color: var(--color-offwhite);
+  font-weight: 700;
+}
+
+.featured-video-col .featured-video-wrapper {
+  min-height: 560px;
+  width: 100%;
+}
+
+.basecase-video-player {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border: none;
+}
+
+/* 14. VIDEOGRAPHY ARTBOARD & GRID (100% COMPLETE 21/21 REELS) */
+.videography-artboard-section {
+  padding: 8rem 2rem;
+}
+
+.editorial-video-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 2rem;
+
+}
+
+.video-grid-item.item-wide {
+  grid-column: span 12;
+  min-height: 520px;
+}
+
+.video-grid-item.item-medium {
+  grid-column: span 6;
+  min-height: 420px;
+}
+
+.video-grid-item.item-small {
+  grid-column: span 4;
+  min-height: 320px;
+}
+
+/* 15. EDITORIAL SERVICES SEQUENCE (NO CARDS) */
+.services-editorial-section {
+  padding: 8rem 2rem;
+}
+
+.services-continuous-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.service-row-item {
+  display: grid;
+  grid-template-columns: 240px 1.5fr 2fr;
+  gap: 3rem;
+  padding: 3rem 0;
+  align-items: flex-start;
+}
+
+.service-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.service-num {
+  font-size: 14px;
+  color: var(--color-blue);
+  font-weight: 700;
+}
+
+.service-title-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.service-title {
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 4vw, 4.2rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+}
+
+.service-badge {
+  display: inline-block;
+  padding: 0.25rem 0.6rem;
+  background: var(--color-charcoal-light);
+  border: 1px solid var(--rule-color);
+  width: fit-content;
+}
+
+.service-desc {
+  font-size: 1.1rem;
+  color: var(--color-muted);
+  line-height: 1.7;
+}
+
+/* 16. ELECTRIC BLUE VISUAL CHAPTER */
+.blue-chapter-section {
+  background-color: var(--color-blue);
+  color: var(--color-purewhite);
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6rem 2rem;
+  text-align: center;
+}
+
+.blue-chapter-inner {
+  max-width: 1200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2.5rem;
+}
+
+.blue-meta {
+  display: flex;
+  gap: 2rem;
+  color: rgba(255,255,255,0.7);
+}
+
+.blue-giant-statement {
+  font-family: var(--font-display);
+  font-size: clamp(3.8rem, 10vw, 11rem);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 0.95;
+  text-transform: uppercase;
+}
+
+.blue-subtext {
+  font-family: var(--font-mono);
+  font-size: 1.2rem;
+  letter-spacing: 0.1em;
+  max-width: 600px;
+}
+
+.blue-hud-bottom {
+  display: flex;
+  gap: 3rem;
+  color: rgba(255,255,255,0.7);
+}
+
+/* 17. BLACK TYPOGRAPHIC CHAPTER */
+.black-chapter-section {
+  padding: 6rem 0;
+  background-color: var(--color-black);
+  border-top: 1px solid var(--rule-color);
+  border-bottom: 1px solid var(--rule-color);
+  overflow: hidden;
+}
+
+/* 18. FINAL CONTACT & FOOTER */
+.contact-editorial-section {
+  padding: 9rem 2rem 4rem 2rem;
+}
+
+.contact-editorial-layout {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 5rem;
+  margin-bottom: 7rem;
+}
+
+.contact-huge-headline {
+  font-family: var(--font-display);
+  font-size: clamp(3.8rem, 8vw, 8.5rem);
+  font-weight: 800;
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+  margin-bottom: 2rem;
+}
+
+.contact-lead-p {
+  font-size: 1.25rem;
+  color: var(--color-muted);
+  line-height: 1.7;
+  max-width: 540px;
+}
+
+.contact-details-col {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.contact-person-block {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.person-role {
+  color: var(--color-blue);
+  font-weight: 700;
+}
+
+.person-name {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.contact-link-phone {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 0.25rem;
+}
+
+.link-val {
+  font-family: var(--font-mono);
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--color-offwhite);
+  transition: color 0.25s ease;
+}
+
+.contact-link-phone:hover .link-val {
+  color: var(--color-blue);
+}
+
+.contact-email-block {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.contact-link-email {
+  font-family: var(--font-mono);
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--color-offwhite);
+  transition: color 0.25s ease;
+  word-break: break-all;
+}
+
+.contact-link-email:hover {
+  color: var(--color-blue);
+}
+
+/* FOOTER ART BOOK STYLE */
+.px-footer {
+  width: 100%;
+  border-top: 1px solid var(--rule-color);
+  padding-top: 4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+.footer-top-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.footer-logo-img {
+  height: 36px;
+  width: auto;
+}
+
+.footer-meta {
+  display: flex;
+  gap: 2rem;
+}
+
+.footer-giant-title {
+  font-family: var(--font-display);
+  font-size: clamp(5rem, 18vw, 22rem);
+  font-weight: 800;
+  line-height: 0.85;
+  letter-spacing: -0.05em;
+  color: rgba(255,255,255,0.06);
+  text-transform: uppercase;
+  pointer-events: none;
+  user-select: none;
+}
+
+.footer-bottom-credits {
+  display: flex;
+  justify-content: space-between;
+  border-top: 1px solid var(--rule-color-subtle);
+  padding-top: 1.5rem;
+}
+
+/* 19. RESPONSIVE DESIGN BREAKPOINTS */
+@media (max-width: 1100px) {
+  .hero-grid-two-col {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+  .basecase-lens-wrapper {
+    width: 320px;
+    height: 320px;
+  }
+  .profile-editorial-grid {
+    grid-template-columns: 1fr;
+  }
+  .row-hero-pair, .row-trio, .row-interlock {
+    grid-template-columns: 1fr;
+  }
+  .featured-project-layout {
+    grid-template-columns: 1fr;
+  }
+  .video-grid-item.item-medium, .video-grid-item.item-small {
+    grid-column: span 12;
+  }
+  .service-row-item {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  .contact-editorial-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .px-header {
+    padding: 0 1rem;
+  }
+  .px-header-center {
+    display: none;
+  }
+  .px-header-right {
+    gap: 0.75rem;
+    font-size: 9px;
+  }
+  .editorial-section {
+    padding: 4rem 1rem;
+  }
+  .hero-desc {
+    font-size: 1rem;
+  }
+  .basecase-lens-wrapper {
+    width: 270px;
+    height: 270px;
+  }
+  .face-safe-img {
+    max-height: 400px;
+  }
+  .artboard-giant-heading {
+    margin-bottom: -1rem;
+  }
+  .footer-meta, .footer-bottom-credits {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+}
